@@ -2,7 +2,11 @@ import json
 import os
 from datetime import datetime
 from time import sleep
-cwd=os.getcwd()
+import winsound
+
+def notify():
+    winsound.PlaySound('notify.wav', winsound.SND_FILENAME)
+
 def get_data(path):
     try:
         with open(path) as f:
@@ -30,7 +34,6 @@ def remove_expired_task():
     for key in data.keys():
         data[key]=data[key].replace(':','')
 
-
 def time_difference(data):
     time_line=list()
     current_time=curr_time()
@@ -45,22 +48,12 @@ def time_difference(data):
         current_time=datetime.strptime(i,"%H%M")
     return time_line
 
-
-
-
-"""
-    find time difference and next and store in (key,next time) format 
-    then get sleep for that time and 
-
-"""
-
-
 def curr_time():
     now = datetime.now()
     return now.strftime("%H:%M")
     
-
-data = get_data(cwd+'\Todo\data.json')
+cwd=os.getcwd()
+data = get_data(cwd+'\Todo_app_pyton\data.json')
 print(data)
 data=sort_task(data)
 print('sorted data -->',data)
@@ -69,4 +62,13 @@ time_line=time_difference(data)
 print(time_line)
 for i in range(len(time_line)):
     sleep(time_line[i])
+    notify()
     print('Hello BOii its time',curr_time())
+    
+
+
+
+
+
+
+
