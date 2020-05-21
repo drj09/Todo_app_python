@@ -26,11 +26,11 @@ def remove_expired_task():
     expired_task=[]
     for i,j in data.items():
         if j<current_time:
-            print(i,j)
+            #print(i,j)
             expired_task.append(i)
     for i in expired_task:
-        print('pop',data.pop(i))
-    print('after removing expired task',data)
+        data.pop(i)
+    #print('after removing expired task',data)
     for key in data.keys():
         data[key]=data[key].replace(':','')
 
@@ -39,12 +39,12 @@ def time_difference(data):
     current_time=curr_time()
     current_time=current_time.replace(':','')
     current_time = datetime.strptime(current_time,"%H%M")
-    print('nija',current_time,data)
-    for i in data.values():
-        print('-',i)
+    #print('nija',current_time,data)
+    for key,i in data.items():
+        #print('-',i)
         diff=datetime.strptime(i,"%H%M")-current_time
-        print(diff)
-        time_line.append(diff.seconds)
+        #print(diff)
+        time_line.append((diff.seconds,key))
         current_time=datetime.strptime(i,"%H%M")
     return time_line
 
@@ -54,19 +54,18 @@ def curr_time():
     
 cwd=os.getcwd()
 data = get_data(cwd+'\Todo_app_pyton\data.json')
-print(data)
+#print(data)
 data=sort_task(data)
-print('sorted data -->',data)
+#print('sorted data -->',data)
 remove_expired_task()
 time_line=time_difference(data)
-print(time_line)
+print("Program started")
+#print(time_line)
 for i in range(len(time_line)):
-    sleep(time_line[i])
+    sleep(time_line[i][0])
     notify()
-    print('Hello BOii its time',curr_time())
+    print('Hey boii its time for ', time_line[i][1] ,curr_time())
     
-
-
 
 
 
