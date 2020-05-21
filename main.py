@@ -70,11 +70,3 @@ print(time_line)
 for i in range(len(time_line)):
     sleep(time_line[i])
     print('Hello BOii its time',curr_time())
-
-"""
-for i in range(20):
-    time()
-    sleep(5)
-    
-"""
-
