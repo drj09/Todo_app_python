@@ -9,5 +9,5 @@ Procedure:
   -sorting tasks according to time
   -removing expired task (if any) based on current time
   -calculating difference between all the tasks 
-  -notifying after particular time 
+  -notifying sound for todo
   
